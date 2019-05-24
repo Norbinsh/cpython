@@ -154,8 +154,10 @@ STRINGLIB(split)(PyObject* str_obj,
         PyErr_SetString(PyExc_ValueError, "empty separator");
         return NULL;
     }
-    else if (sep_len == 1)
+    else if (sep_len == 1) {
+        printf("%d", sep[0]);        /* ASCII value? http://www.asciitable.com/ */
         return STRINGLIB(split_char)(str_obj, str, str_len, sep[0], maxcount);
+    }
 
     list = PyList_New(PREALLOC_SIZE(maxcount));
     if (list == NULL)
